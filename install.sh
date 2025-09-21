@@ -27,9 +27,16 @@ set_up_ssh_agent() {
   fi
 }
 
+set_up_vim() {
+  create_symlink "$PWD/vim/.vimrc"
+  mkdir -p "$HOME/.vim"
+  create_symlink "$PWD/vim/functions.vim" "$HOME/.vim"
+}
+
 main() {
   set_up_git
   set_up_ssh
+  set_up_vim
 }
 
 main
