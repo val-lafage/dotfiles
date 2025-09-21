@@ -33,10 +33,15 @@ set_up_vim() {
   create_symlink "$PWD/vim/functions.vim" "$HOME/.vim"
 }
 
+set_up_tmux() {
+  create_symlink "$PWD/tmux/.tmux.conf"
+}
+
 main() {
   set_up_git
   set_up_ssh
   set_up_vim
+  set_up_tmux
 }
 
 main
