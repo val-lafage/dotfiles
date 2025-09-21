@@ -37,11 +37,23 @@ set_up_tmux() {
   create_symlink "$PWD/tmux/.tmux.conf"
 }
 
+set_up_bash() {
+  local dst="$HOME/.bashrc.d"
+  mkdir -p "$dst"
+  create_symlink "$PWD/bash/.bashrc"
+  create_symlink "$PWD/bash/00-variables" "$dst"
+  create_symlink "$PWD/bash/01-aliases" "$dst"
+  create_symlink "$PWD/bash/functions" "$dst"
+  create_symlink "$PWD/bash/.path.sh"
+  source "$HOME/.bashrc"
+}
+
 main() {
   set_up_git
   set_up_ssh
   set_up_vim
   set_up_tmux
+  set_up_bash
 }
 
 main
