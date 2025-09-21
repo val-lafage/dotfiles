@@ -48,6 +48,13 @@ set_up_bash() {
   source "$HOME/.bashrc"
 }
 
+set_up_vscode() {
+  local dst="$HOME/.config/Code/User"
+  if [[ -d "$dst" ]]; then
+    create_symlink "$PWD/vscode/settings.json" "$dst"
+  fi
+}
+
 set_up_gnome() {
   echo -e "\n Updating GNOME"
   if command -v gnome-terminal >/dev/null 2>&1; then
@@ -76,6 +83,7 @@ main() {
   set_up_vim
   set_up_tmux
   set_up_bash
+  set_up_vscode
   set_up_desktop_env
 }
 
