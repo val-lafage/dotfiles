@@ -48,12 +48,35 @@ set_up_bash() {
   source "$HOME/.bashrc"
 }
 
+set_up_gnome() {
+  echo -e "\n Updating GNOME"
+  if command -v gnome-terminal >/dev/null 2>&1; then
+    set_up_gnome_terminal
+  fi
+}
+
+set_up_gnome_terminal() {
+  dconf load "/org/gnome/terminal/" < "$PWD/gnome/terminal.dconf"
+  if [[ $? -eq 0 ]]; then
+    echo "    - $(print_bf Terminal) updated"
+  fi
+}
+
+set_up_desktop_env() {
+  case "$XDG_CURRENT_DESKTOP" in
+    *GNOME*)
+      set_up_gnome
+      ;;
+  esac
+}
+
 main() {
   set_up_git
   set_up_ssh
   set_up_vim
   set_up_tmux
   set_up_bash
+  set_up_desktop_env
 }
 
 main
